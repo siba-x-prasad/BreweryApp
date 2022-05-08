@@ -52,8 +52,8 @@ data class BoilVolume(
 @Keep
 @Parcelize
 data class Ingredients(
-    val hops: List<Hop>?,
-    val malt: List<Hop>?,
+    val hops: ArrayList<Hop>?,
+    val malt: ArrayList<Hop>?,
     val yeast: String? // Wyeast 3333 - German Wheat™
 ) : Parcelable
 
@@ -81,7 +81,8 @@ data class Hop(
     val add: String? = "", // start
     val amount: Amount?,
     val attribute: String? = "", // bitter
-    val name: String? // Columbus
+    val name: String?, // Columbus,
+    var id: Int = 0
 ) : Parcelable {
     var isWeighed: Boolean? = false
     val measurement: String?

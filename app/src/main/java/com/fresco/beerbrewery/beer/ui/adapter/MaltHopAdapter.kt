@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fresco.beerbrewery.BR
 import com.fresco.beerbrewery.beer.listeners.IngredientClickListener
-import com.fresco.beerbrewery.beer.model.BeerItem
 import com.fresco.beerbrewery.beer.model.Hop
 import com.fresco.beerbrewery.databinding.ItemviewMaltHopsBinding
 
@@ -37,6 +36,7 @@ class MaltHopAdapter(private val ingredientClickListener: IngredientClickListene
 
     override fun onBindViewHolder(holder: MaltHopsViewHolder, position: Int) {
         val item = differ.currentList[position]
+        item.id = position
         holder.bind(item, ingredientClickListener)
     }
 

@@ -13,6 +13,8 @@ import com.fresco.beerbrewery.beer.listeners.IngredientClickListener
 import com.fresco.beerbrewery.beer.model.BeerItem
 import com.fresco.beerbrewery.beer.model.Hop
 import com.fresco.beerbrewery.beer.ui.adapter.MaltHopAdapter
+import com.fresco.beerbrewery.beer.ui.weigh.SharedBeerViewModel
+import com.fresco.beerbrewery.common.util.Constants
 import com.fresco.beerbrewery.databinding.BeerDetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class BeerDetailsFragment : Fragment(), IngredientClickListener {
 
     private val viewModel by viewModels<BeerDetailsViewModel>()
+    private val sharedBeerViewModel: SharedBeerViewModel by viewModels()
     private lateinit var binding: BeerDetailsFragmentBinding
+    private var beerItem: BeerItem? = null
 
     private val hopAdapter: MaltHopAdapter by lazy {
         MaltHopAdapter(this)
@@ -37,20 +41,28 @@ class BeerDetailsFragment : Fragment(), IngredientClickListener {
             inflater, R.layout.beer_details_fragment, container, false
         )
 
-        val beerItems = arguments?.getParcelable<BeerItem>("beerItem")
-        beerItems?.let {
-            hopAdapter.updateItems(beerItems.ingredients?.hops)
-            maltAdapter.updateItems(beerItems.ingredients?.malt)
+        beerItem = arguments?.getParcelable(Constants.KEY_BEER_ITEM)
+        beerItem?.let {
+            hopAdapter.updateItems(beerItem?.ingredients?.hops)
+            maltAdapter.updateItems(beerItem?.ingredients?.malt)
         }
+
         val view: View = binding.root
         binding.viewModel = viewModel
-        binding.beer = beerItems
+        binding.beer = beerItem
         binding.hopadapter = hopAdapter
         binding.maltadapter = maltAdapter
         return view
     }
 
     override fun onWeighClick(hopMalts: Hop) {
+        hopMalts.isWeighed = true
+        if (hopMalts.attribute.isNullOrEmpty() && hopMalts.add.isNullOrEmpty()) {
+            beerItem?.ingredients?.malt?.set(hopMalts.id, hopMalts)
+        } else {
+            beerItem?.ingredients?.hops?.set(hopMalts.id, hopMalts)
+        }
+        sharedBeerViewModel.updateBeerItem(beerItem)
         val action =
             BeerDetailsFragmentDirections.actionBeerDetailsFragmentToBeerWeighFragment(hopMalts)
         findNavController().navigate(action)

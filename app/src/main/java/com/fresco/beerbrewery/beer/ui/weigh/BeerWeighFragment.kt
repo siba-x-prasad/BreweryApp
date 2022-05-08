@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.fresco.beerbrewery.R
 import com.fresco.beerbrewery.beer.model.Hop
+import com.fresco.beerbrewery.common.util.Constants
 import com.fresco.beerbrewery.common.views.SeekArc
 import com.fresco.beerbrewery.databinding.BeerWeighFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +30,8 @@ class BeerWeighFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.beer_weigh_fragment, container, false
         )
-        hops = arguments?.getParcelable<Hop>("maltOrHops")
+        hops = arguments?.getParcelable(Constants.KEY_MALT_HOPS)
+
         viewModel.weighDetails = hops
         val view: View = binding.root
         binding.data = hops
@@ -44,11 +46,8 @@ class BeerWeighFragment : Fragment() {
                 viewModel.weighUiState.seekBarValue.set(progress)
             }
 
-            override fun onStartTrackingTouch(seekArc: SeekArc?) {
-            }
-
-            override fun onStopTrackingTouch(seekArc: SeekArc?) {
-            }
+            override fun onStartTrackingTouch(seekArc: SeekArc?) {}
+            override fun onStopTrackingTouch(seekArc: SeekArc?) {}
         })
 
         binding.buttonDone.setOnClickListener {

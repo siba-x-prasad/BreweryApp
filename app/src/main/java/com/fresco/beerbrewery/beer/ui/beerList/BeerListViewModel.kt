@@ -2,13 +2,11 @@ package com.fresco.beerbrewery.beer.ui.beerList
 
 import android.content.Context
 import android.widget.Toast
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.fresco.beerbrewery.beer.model.BeerItem
-import com.fresco.beerbrewery.beer.model.BeerResponse
 import com.fresco.beerbrewery.beer.model.ResponseState
 import com.fresco.beerbrewery.beer.ui.base.BaseViewModel
 import com.fresco.beerbrewery.common.util.Constants
@@ -26,12 +24,17 @@ class BeerListViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository
 ) : BaseViewModel() {
 
-    private var beerList: List<BeerItem> = listOf()
+    private var beerList: ArrayList<BeerItem>? = null
     private var pageCount: Int = Constants.DEFAULT_PAGE_NUMBER
     private var itemCountPerPage: Int = Constants.DEFAULT_ITEM_PER_PAGE
 
     init {
         loadBeerData()
+    }
+
+    fun updateBeerItem(beerItem: BeerItem) {
+        beerList?.set(beerItem.id!!, beerItem)
+        _beerData.postValue(beerList!!)
     }
 
     val beerData: LiveData<List<BeerItem>>
@@ -46,7 +49,7 @@ class BeerListViewModel @Inject constructor(
                     weatherRepository.fetchBeersByPage(pageCount, itemCountPerPage).let {
                         obsevableLoading.set(false)
                         if (it.isSuccessful) {
-                            val beerList = it.body()?.toList()
+                            beerList = it.body()?.toList() as ArrayList<BeerItem>?
                             beerList?.let { beers ->
                                 _beerData.postValue(beers)
                             }
@@ -88,7 +91,7 @@ class BeerListViewModel @Inject constructor(
     }
 
     fun getBeerLists() = liveData(Dispatchers.IO) {
-        if (beerList.isEmpty()) {
+        if (beerList?.isEmpty() == true) {
             obsevableLoading.set(true)
             try {
                 val listMeteors = weatherRepository.fetchBeersByPage(pageCount, itemCountPerPage)

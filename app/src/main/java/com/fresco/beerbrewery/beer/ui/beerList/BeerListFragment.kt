@@ -14,6 +14,7 @@ import com.fresco.beerbrewery.R
 import com.fresco.beerbrewery.beer.listeners.BeerClickListener
 import com.fresco.beerbrewery.beer.model.BeerItem
 import com.fresco.beerbrewery.beer.ui.adapter.BeerAdapter
+import com.fresco.beerbrewery.beer.ui.weigh.SharedBeerViewModel
 import com.fresco.beerbrewery.databinding.BeerListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class BeerListFragment : Fragment(), BeerClickListener {
 
     private val viewModel by viewModels<BeerListViewModel>()
+    private val sharedBeerViewModel: SharedBeerViewModel by viewModels()
     private lateinit var binding: BeerListFragmentBinding
     private var isLoading = false
 
@@ -46,6 +48,9 @@ class BeerListFragment : Fragment(), BeerClickListener {
         initScrollListener()
         viewModel.beerData.observe(viewLifecycleOwner) {
             adapter.updateItems(it)
+        }
+        sharedBeerViewModel.mutableBeerData.observe(viewLifecycleOwner) {
+            viewModel.updateBeerItem(it)
         }
     }
 
