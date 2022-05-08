@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/beer_nav_graph"
+    app:startDestination="@id/beerListFragment">
+
+    <fragment
+        android:id="@+id/beerListFragment"
+        android:name="com.fresco.beerbrewery.beer.ui.beerList.BeerListFragment"
+        android:label="beer_list_fragment"
+        tools:layout="@layout/beer_list_fragment">
+        <action
+            android:id="@+id/action_beerListFragment_to_beerDetailsFragment"
+            app:destination="@id/beerDetailsFragment">
+            <argument
+                android:name="beerItem"
+                app:argType="com.fresco.beerbrewery.beer.model.BeerItem"
+                app:nullable="true" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/beerDetailsFragment"
+        android:name="com.fresco.beerbrewery.beer.ui.beerDetails.BeerDetailsFragment"
+        android:label="beer_details_fragment"
+        tools:layout="@layout/beer_details_fragment">
+        <action
+            android:id="@+id/action_beerDetailsFragment_to_beerWeighFragment"
+            app:destination="@id/beerWeighFragment">
+            <argument
+                android:name="maltOrHops"
+                android:defaultValue="@null"
+                app:argType="com.fresco.beerbrewery.beer.model.Hop"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/beerWeighFragment"
+        android:name="com.fresco.beerbrewery.beer.ui.weigh.BeerWeighFragment"
+        android:label="beer_weigh_fragment"
+        tools:layout="@layout/beer_weigh_fragment">
+        <action
+            android:id="@+id/action_beerWeighFragment_to_beerDetailsFragment"
+            app:popUpTo="@+id/beerDetailsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+</navigation>

@@ -1,0 +1,71 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="beerAdapter"
+            type="com.fresco.beerbrewery.beer.ui.adapter.BeerAdapter" />
+
+        <variable
+            name="viewModel"
+            type="com.fresco.beerbrewery.beer.ui.beerList.BeerListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/beerRootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MeteorActivity">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:refreshing="@{viewModel.obsevableLoading}">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewBeer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:adapter="@{beerAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <!--app:beerItems="@{viewModel.beerData}"-->
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/progressLoadBeers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:visibility="@{viewModel.loadMore ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.errorMessage}"
+            android:textColor="@color/red"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.errorMessage.isEmpty() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/swipe_layout"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

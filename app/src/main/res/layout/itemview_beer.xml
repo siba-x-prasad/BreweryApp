@@ -1,0 +1,108 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="beer"
+            type="com.fresco.beerbrewery.beer.model.BeerItem" />
+
+        <variable
+            name="beerClickListener"
+            type="com.fresco.beerbrewery.beer.listeners.BeerClickListener" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_8dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        android:elevation="@dimen/dimen_8dp"
+        app:cardCornerRadius="@dimen/dimen_5dp"
+        app:cardElevation="@dimen/dimen_10dp"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_3dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:onClick="@{() -> beerClickListener.onBeerClick(beer)}"
+                app:beerImage="@{beer.image_url}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewFavourite"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:background="@drawable/boarder_circle"
+                android:padding="@dimen/dimen_5dp"
+                android:src="@{beer.isFavourite > 0 ? @drawable/favourite : @drawable/not_favourite }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/beer_background"
+                android:padding="@dimen/dimen_5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBeerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{beer.name}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tvBeerDesc"
+                    tools:text="Beer Name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBeerDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{beer.description}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_11sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvBeerAbv"
+                    tools:text="@string/beer_desc" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBeerAbv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{`Beer ABV : ` + beer.abv}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="@string/beer_abv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

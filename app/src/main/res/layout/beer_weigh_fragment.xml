@@ -1,0 +1,148 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.fresco.beerbrewery.beer.model.Hop" />
+
+        <variable
+            name="viewModel"
+            type="com.fresco.beerbrewery.beer.ui.weigh.BeerWeighViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        tools:context=".beer.ui.weigh.BeerWeighFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvWeighTitle"
+            style="@style/textTitleStyle"
+            android:text="@string/weigh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.fresco.beerbrewery.common.views.SeekArc
+            android:id="@+id/seekBarWeigh"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_gravity="center"
+            android:padding="85dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:progress="@{viewModel.weighUiState.seekBarValue}"
+            seekarc:arcWidth="3dp"
+            seekarc:max="300"
+            seekarc:rotation="180"
+            seekarc:startAngle="30"
+            seekarc:sweepAngle="300"
+            seekarc:touchInside="false" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAmount"
+            style="@style/textTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:text="@{data.roundValueAmount.toString()}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_100sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="25" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAmountDetails"
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:gravity="center"
+            android:text="@{viewModel.weighUiState.seekBarValue.toString()+` `+data.amount.unit}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAmount"
+            tools:text="25" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonZero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:background="@drawable/rounded_boarder_drawable"
+                android:text="@string/zero"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvItemName"
+                tools:text="@string/done" />
+        </FrameLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvItemName"
+            style="@style/textTitleStyle"
+            android:gravity="start"
+            android:text="@{data.name}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvQuantity"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/boil_volume" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvQuantity"
+            style="@style/textTitleStyle"
+            android:layout_marginBottom="20dp"
+            android:gravity="start"
+            android:text="@{data.measurement}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_12sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/buttonDone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:textAllCaps="false"
+            tools:text="@string/app_name" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonDone"
+            style="@style/buttonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:text="@string/done"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@string/done" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

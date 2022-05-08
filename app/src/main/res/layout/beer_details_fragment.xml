@@ -1,0 +1,325 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="hopadapter"
+            type="com.fresco.beerbrewery.beer.ui.adapter.MaltHopAdapter" />
+
+        <variable
+            name="maltadapter"
+            type="com.fresco.beerbrewery.beer.ui.adapter.MaltHopAdapter" />
+
+        <variable
+            name="beer"
+            type="com.fresco.beerbrewery.beer.model.BeerItem" />
+
+        <variable
+            name="viewModel"
+            type="com.fresco.beerbrewery.beer.ui.beerDetails.BeerDetailsViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/beerRootView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            tools:context=".ui.MeteorActivity">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewBeer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0dp"
+                app:beerImage="@{beer.image_url}"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/beer_background"
+                android:padding="@dimen/dimen_5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewBeer">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBeerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{beer.name}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tvBeerDesc"
+                    tools:text="@string/beer_name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBeerDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{beer.description}"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tvBeerAbv"
+                    tools:text="@string/beer_desc" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBeerAbv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{`Beer ABV : ` + beer.abv}"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="@string/beer_abv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewOtherDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvWeighTitle"
+                        style="@style/textTitleStyle"
+                        android:text="@string/other_details"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFirst_brewed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@{`First Brewed : `+beer.first_brewed}"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWeighTitle"
+                        tools:text="@string/first_brewed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTagLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@{`Tag Line : `+beer.tagline}"
+                        app:layout_constraintTop_toBottomOf="@+id/tvFirst_brewed"
+                        tools:text="Tag Line" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvContribution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@{`Contributed By : `+beer.contributed_by}"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTagLine"
+                        tools:text="@string/contributed_by" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvBrewers_tips"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@{`Brewers Tips : `+beer.brewers_tips}"
+                        app:layout_constraintTop_toBottomOf="@+id/tvContribution"
+                        tools:text="@string/beer_tips" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFoodPairing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@{`Food Pairing : `+beer.foodPairingStr}"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBrewers_tips"
+                        tools:text="@string/food_pairing" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvOtherDet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@{beer.otherDetails}"
+                        app:layout_constraintTop_toBottomOf="@+id/tvFoodPairing"
+                        tools:text="@string/other_details" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvVolume"
+                        style="@style/textStyle"
+                        android:text="@{beer.volume.beerVolume}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvOtherDet"
+                        tools:text="@string/beer_volume" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvBoilVolume"
+                        style="@style/textStyle"
+                        android:text="@{beer.boil_volume.boilVolume}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvVolume"
+                        tools:text="@string/boil_volume" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewMethods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_5dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewOtherDetails">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMethods"
+                            style="@style/textTitleStyle"
+                            android:text="@string/beer_methods"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMethod"
+                            style="@style/textStyle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvMethods"
+                            app:methodText="@{beer.method}" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_5dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewMethods">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvIngredients"
+                            style="@style/textTitleStyle"
+                            android:text="@string/beer_ingredient"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayoutMalt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMalt"
+                            style="@style/textTitleStyle"
+                            android:layout_width="wrap_content"
+                            android:background="@drawable/rounded_boarder_drawable"
+                            android:text="@string/malt"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <include
+                            android:id="@+id/includeMaltTitle"
+                            layout="@layout/include_ingredient_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tvMalt" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewMalt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@+id/includeMaltTitle"
+                            app:malthopdapter="@{hopadapter}" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayoutHop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHops"
+                            style="@style/textTitleStyle"
+                            android:layout_width="wrap_content"
+                            android:background="@drawable/rounded_boarder_drawable"
+                            android:text="@string/hops"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <include
+                            android:id="@+id/includeHopsTitle"
+                            layout="@layout/include_ingredient_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tvHops" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewHops"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@+id/includeHopsTitle"
+                            app:malthopdapter="@{maltadapter}" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
+
