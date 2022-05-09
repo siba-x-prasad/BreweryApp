@@ -59,16 +59,16 @@
 <table>
 <tr>
 <td>
-  <img src="https://github.com/sibaprasad12/MeteoriteApp_assignment/blob/main/app/images/ss1.png" width="250" height="400" />
+  <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss1.png" width="250" height="400" />
  </td>
 <td>
- <img src="https://github.com/sibaprasad12/MeteoriteApp_assignment/blob/main/app/images/ss2.png" width="250" height="400"/>
+ <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss2.png" width="250" height="400"/>
 </td>
   <td>
-  <img src="https://github.com/sibaprasad12/MeteoriteApp_assignment/blob/main/app/images/ss3.png" width="250" height="400" />
+  <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss3.png" width="250" height="400" />
  </td>
 <td>
- <img src="https://github.com/sibaprasad12/MeteoriteApp_assignment/blob/main/app/images/ss4.png" width="250" height="400"/>
+ <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss4.png" width="250" height="400"/>
 </td>
 </tr>
 </table>
