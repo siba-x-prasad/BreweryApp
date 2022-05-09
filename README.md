@@ -59,16 +59,16 @@
 <table>
 <tr>
 <td>
-  <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss1.png" width="250" height="400" />
+  <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss1.png" width="250" height="370" />
  </td>
 <td>
- <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss2.png" width="250" height="400"/>
+ <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss2.png" width="250" height="370"/>
 </td>
   <td>
-  <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss3.png" width="250" height="400" />
+  <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss3.png" width="250" height="370" />
  </td>
 <td>
- <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss4.png" width="250" height="400"/>
+ <img src="https://github.com/siba-x-prasad/BreweryApp/blob/master/imageAssets/ss4.png" width="250" height="370"/>
 </td>
 </tr>
 </table>
