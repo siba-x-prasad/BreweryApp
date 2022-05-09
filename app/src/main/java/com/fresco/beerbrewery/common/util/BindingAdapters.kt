@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fresco.beerbrewery.R
-import com.fresco.beerbrewery.beer.model.BeerItem
 import com.fresco.beerbrewery.beer.model.Method
 import com.fresco.beerbrewery.beer.ui.adapter.BeerAdapter
 import com.fresco.beerbrewery.beer.ui.adapter.MaltHopAdapter
@@ -15,7 +14,6 @@ import com.squareup.picasso.Picasso
 
 
 object BindingAdapters {
-
 
     @JvmStatic
     @BindingAdapter("malthopdapter")
@@ -40,17 +38,6 @@ object BindingAdapters {
             tempMethods += "${it.temp?.value} ${it.temp?.unit} duration : ${it.duration} \n"
         }
         apptextView.text = "$fermentation Mash Temperature : $tempMethods"
-    }
-
-    @JvmStatic
-    @BindingAdapter(value = ["updateBeers"])
-    fun RecyclerView.updateRecyclerViewAdapter(
-        beerList: MutableList<BeerItem>?
-    ) {
-        val adapter = this.adapter as BeerAdapter
-        if (beerList != null) {
-            adapter.beerList = beerList
-        }
     }
 
     @JvmStatic

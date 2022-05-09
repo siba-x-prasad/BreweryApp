@@ -20,4 +20,7 @@
     <string name="name">Name</string>
     <string name="amount">Amount</string>
     <string name="zero">Zero</string>
+    <string name="beer_list">Beer List</string>
+    <string name="beer_details">Beer Details</string>
+    <string name="beer_weigh">Beer Weigh</string>
 </resources>

@@ -47,7 +47,7 @@
                 android:layout_height="@dimen/dimen_40dp"
                 android:background="@drawable/boarder_circle"
                 android:padding="@dimen/dimen_10dp"
-                android:src="@{beer.isFavourite > 0 ? @drawable/favourite : @drawable/not_favourite }"
+                android:src="@{beer.isWeighed ? @drawable/favourite : @drawable/not_favourite }"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

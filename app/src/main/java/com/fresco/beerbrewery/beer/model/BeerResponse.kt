@@ -38,6 +38,8 @@ data class BeerItem(
 
     val otherDetails: String
         get() = "Ph : $ph, srm $srm,  ibu : $ibu, target_fg : $target_fg, Target OG : $target_og"
+
+    var isWeighed: Boolean = false
 }
 
 @Keep
@@ -104,7 +106,7 @@ data class Malt(
 @Parcelize
 data class Amount(
     val unit: String?, // grams
-    val value: Double? // 12.5
+    var value: Double? // 12.5
 ) : Parcelable
 
 @Keep

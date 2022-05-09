@@ -3,15 +3,29 @@ package com.fresco.beerbrewery.beer.ui.weigh
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fresco.beerbrewery.beer.model.BeerItem
+import com.fresco.beerbrewery.beer.model.Hop
 import javax.inject.Inject
 
-class SharedBeerViewModel @Inject constructor() : ViewModel() {
+open class SharedBeerViewModel @Inject constructor() : ViewModel() {
 
-    var mutableBeerData = MutableLiveData<BeerItem>()
+    private val mutableBeerData = MutableLiveData<BeerItem>()
+    private var _sharedBeerItem: BeerItem? = null
+    fun getSharedBeerItem() = mutableBeerData
 
     fun updateBeerItem(beerItem: BeerItem?) {
+        _sharedBeerItem = beerItem
         beerItem?.let {
-            mutableBeerData.postValue(it)
+            mutableBeerData.postValue(_sharedBeerItem!!)
+        }
+    }
+
+    fun updateMaltsOrHop(maltOrHop: Hop?) {
+        maltOrHop?.isWeighed = true
+        mutableBeerData.value?.isWeighed = true
+        if (maltOrHop?.attribute.isNullOrEmpty() && maltOrHop?.add.isNullOrEmpty()) {
+            mutableBeerData.value?.ingredients?.hops?.set(maltOrHop?.id!!, maltOrHop)
+        } else {
+            mutableBeerData.value?.ingredients?.malt?.set(maltOrHop?.id!!, maltOrHop)
         }
     }
 }

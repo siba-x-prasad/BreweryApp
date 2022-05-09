@@ -2,14 +2,13 @@ package com.fresco.beerbrewery.beer.ui.weigh
 
 import android.widget.SeekBar
 import androidx.databinding.ObservableField
-import androidx.lifecycle.ViewModel
 import com.fresco.beerbrewery.beer.model.Hop
 import com.fresco.beerbrewery.beer.model.WeighUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class BeerWeighViewModel @Inject constructor() : ViewModel() {
+class BeerWeighViewModel @Inject constructor() : SharedBeerViewModel() {
 
     var weighDetails: Hop? = null
     val weighUiState = WeighUiState()

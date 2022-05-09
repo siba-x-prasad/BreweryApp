@@ -18,10 +18,6 @@
             name="beer"
             type="com.fresco.beerbrewery.beer.model.BeerItem" />
 
-        <variable
-            name="viewModel"
-            type="com.fresco.beerbrewery.beer.ui.beerDetails.BeerDetailsViewModel" />
-
     </data>
 
     <androidx.core.widget.NestedScrollView

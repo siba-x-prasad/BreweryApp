@@ -8,17 +8,11 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel : ViewModel(), Observable {
 
-    var obsevableLoading = ObservableBoolean(false)
+    var observableLoading = ObservableBoolean(false)
     var loadMore = ObservableBoolean(false)
-
     var errorMessage = ObservableField("")
 
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
 
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-
-    }
-
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-
-    }
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
 }

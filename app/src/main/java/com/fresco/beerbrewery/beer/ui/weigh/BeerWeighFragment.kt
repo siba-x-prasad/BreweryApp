@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.fresco.beerbrewery.R
 import com.fresco.beerbrewery.beer.model.Hop
+import com.fresco.beerbrewery.beer.ui.BeerActivity
 import com.fresco.beerbrewery.common.util.Constants
 import com.fresco.beerbrewery.common.views.SeekArc
 import com.fresco.beerbrewery.databinding.BeerWeighFragmentBinding
@@ -21,7 +22,7 @@ class BeerWeighFragment : Fragment() {
     private val viewModel by viewModels<BeerWeighViewModel>()
     private lateinit var binding: BeerWeighFragmentBinding
 
-    var hops: Hop? = null
+    private var hops: Hop? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +31,8 @@ class BeerWeighFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.beer_weigh_fragment, container, false
         )
-        hops = arguments?.getParcelable(Constants.KEY_MALT_HOPS)
-
-        viewModel.weighDetails = hops
-        val view: View = binding.root
-        binding.data = hops
-        binding.viewModel = viewModel
-        return view
+        setUpUI()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,8 +45,18 @@ class BeerWeighFragment : Fragment() {
             override fun onStartTrackingTouch(seekArc: SeekArc?) {}
             override fun onStopTrackingTouch(seekArc: SeekArc?) {}
         })
+    }
 
+    private fun setUpUI() {
+        (activity as BeerActivity).supportActionBar?.title = getString(R.string.beer_weigh)
+        hops = arguments?.getParcelable(Constants.KEY_MALT_HOPS)
+        viewModel.weighDetails = hops
+        binding.data = hops
+        binding.viewModel = viewModel
         binding.buttonDone.setOnClickListener {
+            hops?.amount?.value = viewModel.weighUiState.seekBarValue.get()?.toDouble()
+            hops?.isWeighed = true
+            viewModel.updateMaltsOrHop(hops)
             val action =
                 BeerWeighFragmentDirections.actionBeerWeighFragmentToBeerDetailsFragment()
             findNavController().navigate(action)

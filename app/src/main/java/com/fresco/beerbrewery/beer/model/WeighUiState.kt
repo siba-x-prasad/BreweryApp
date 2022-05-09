@@ -17,11 +17,8 @@ class WeighUiState : BaseObservable() {
             seekBarValue.set(progress)
         }
 
-        override fun onStartTrackingTouch(seek: SeekBar) {
-        }
+        override fun onStartTrackingTouch(seek: SeekBar) {}
 
-        override fun onStopTrackingTouch(seek: SeekBar) {
-
-        }
+        override fun onStopTrackingTouch(seek: SeekBar) {}
     }
 }

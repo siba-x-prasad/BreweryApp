@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fresco.beerbrewery.R
 import com.fresco.beerbrewery.beer.listeners.BeerClickListener
 import com.fresco.beerbrewery.beer.model.BeerItem
+import com.fresco.beerbrewery.beer.ui.BeerActivity
 import com.fresco.beerbrewery.beer.ui.adapter.BeerAdapter
 import com.fresco.beerbrewery.beer.ui.weigh.SharedBeerViewModel
 import com.fresco.beerbrewery.databinding.BeerListFragmentBinding
@@ -37,21 +38,37 @@ class BeerListFragment : Fragment(), BeerClickListener {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.beer_list_fragment, container, false
         )
-        val view: View = binding.root
-        binding.viewModel = viewModel
-        binding.beerAdapter = adapter
-        return view
+        setUpUI()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initScrollListener()
         viewModel.beerData.observe(viewLifecycleOwner) {
             adapter.updateItems(it)
         }
-        sharedBeerViewModel.mutableBeerData.observe(viewLifecycleOwner) {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedBeerViewModel.getSharedBeerItem().observe(viewLifecycleOwner) {
             viewModel.updateBeerItem(it)
         }
+    }
+
+    override fun onBeerClick(beerItem: BeerItem) {
+        sharedBeerViewModel.updateBeerItem(beerItem)
+        val action =
+            BeerListFragmentDirections.actionBeerListFragmentToBeerDetailsFragment(beerItem)
+        findNavController().navigate(action)
+    }
+
+    private fun setUpUI() {
+        (activity as BeerActivity).supportActionBar?.title = getString(R.string.beer_list)
+        (activity as BeerActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        binding.viewModel = viewModel
+        binding.beerAdapter = adapter
+        initScrollListener()
     }
 
     private fun initScrollListener() {
@@ -66,11 +83,5 @@ class BeerListFragment : Fragment(), BeerClickListener {
                 }
             }
         })
-    }
-
-    override fun onBeerClick(beerItem: BeerItem) {
-        val action =
-            BeerListFragmentDirections.actionBeerListFragmentToBeerDetailsFragment(beerItem)
-        findNavController().navigate(action)
     }
 }

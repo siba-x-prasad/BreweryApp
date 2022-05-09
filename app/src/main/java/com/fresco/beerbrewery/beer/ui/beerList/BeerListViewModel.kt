@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BeerListViewModel @Inject constructor(
     @ApplicationContext private val context: Context?,
-    private val weatherRepository: WeatherRepository
+    private val repository: BearListRepository
 ) : BaseViewModel() {
 
     private var beerList: ArrayList<BeerItem>? = null
@@ -45,9 +45,9 @@ class BeerListViewModel @Inject constructor(
         viewModelScope.launch {
             if (NetworkUtil.isAvailable(context!!)) {
                 try {
-                    obsevableLoading.set(true)
-                    weatherRepository.fetchBeersByPage(pageCount, itemCountPerPage).let {
-                        obsevableLoading.set(false)
+                    observableLoading.set(true)
+                    repository.fetchBeersByPage(pageCount, itemCountPerPage).let {
+                        observableLoading.set(false)
                         if (it.isSuccessful) {
                             beerList = it.body()?.toList() as ArrayList<BeerItem>?
                             beerList?.let { beers ->
@@ -60,11 +60,11 @@ class BeerListViewModel @Inject constructor(
                     }
 
                 } catch (e: Exception) {
-                    obsevableLoading.set(false)
+                    observableLoading.set(false)
                     errorMessage.set("Fetching Error ${e.message}")
                 }
             } else {
-                obsevableLoading.set(false)
+                observableLoading.set(false)
                 Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show()
             }
         }
@@ -75,7 +75,7 @@ class BeerListViewModel @Inject constructor(
             if (NetworkUtil.isAvailable(context)) {
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
-                        weatherRepository.fetchBeersByPage(pageCount, itemCountPerPage).let {
+                        repository.fetchBeersByPage(pageCount, itemCountPerPage).let {
                             pageCount++
                         }
                     } catch (e: Exception) {
@@ -92,18 +92,18 @@ class BeerListViewModel @Inject constructor(
 
     fun getBeerLists() = liveData(Dispatchers.IO) {
         if (beerList?.isEmpty() == true) {
-            obsevableLoading.set(true)
+            observableLoading.set(true)
             try {
-                val listMeteors = weatherRepository.fetchBeersByPage(pageCount, itemCountPerPage)
+                val listMeteors = repository.fetchBeersByPage(pageCount, itemCountPerPage)
                 emit(ResponseState.success(beerList))
-                obsevableLoading.set(false)
+                observableLoading.set(false)
             } catch (exception: Exception) {
-                obsevableLoading.set(false)
+                observableLoading.set(false)
                 errorMessage.set(exception.message ?: "Error Occurred!")
                 emit(ResponseState.error(null, exception.message ?: "Error Occurred!"))
             }
         } else {
-            obsevableLoading.set(false)
+            observableLoading.set(false)
             emit(ResponseState.success(beerList))
         }
     }

@@ -14,7 +14,7 @@ import com.fresco.beerbrewery.databinding.ItemviewBeerBinding
 class BeerAdapter(private val beerClickListener: BeerClickListener) :
     RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
 
-    var beerList: List<BeerItem> = ArrayList()
+    private var beerList: List<BeerItem> = ArrayList()
 
     class BeerViewHolder(private val binding: ItemviewBeerBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -59,13 +59,6 @@ class BeerAdapter(private val beerClickListener: BeerClickListener) :
 
     private val differ: AsyncListDiffer<BeerItem> =
         AsyncListDiffer(this, beerDiffCallback)
-
-    fun setBeerListerer(beers: MutableList<BeerItem>) {
-        if (beers.isNotEmpty()) {
-            beerList = beers
-            differ.submitList(beers)
-        }
-    }
 
     fun updateItems(beers: List<BeerItem>?) {
         if (beers?.isNotEmpty() == true) {

@@ -63,7 +63,7 @@ class MaltHopAdapter(private val ingredientClickListener: IngredientClickListene
         AsyncListDiffer(this, maltOrHopsDiffCallback)
 
 
-    fun updateItems(maltOrHops: List<Hop>?) {
+    fun updateMaltOrHops(maltOrHops: List<Hop>?) {
         if (maltOrHops?.isNotEmpty() == true) {
             maltOrHopsList = maltOrHops
             differ.submitList(maltOrHops)
