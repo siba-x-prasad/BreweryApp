@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/boarder_circle.xml" value="0.1575" />
+        <entry key="app/src/main/res/drawable/favourite.xml" value="0.1575" />
+        <entry key="app/src/main/res/drawable/not_favourite.xml" value="0.1575" />
+        <entry key="app/src/main/res/drawable/rounded_boarder_drawable.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/rounded_button_drawable.xml" value="0.158" />
+        <entry key="app/src/main/res/drawable/rounded_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/seek_arc_control_selector.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/thumb_disable.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/thumb_enable.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/title_drawable_bg.xml" value="0.1205" />
+        <entry key="app/src/main/res/layout/activity_beer.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/beer_details_fragment.xml" value="0.1265625" />
+        <entry key="app/src/main/res/layout/beer_list_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/beer_weigh_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/include_ingradient_header.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/include_ingredient_header.xml" value="0.13269927536231885" />
+        <entry key="app/src/main/res/layout/itemview_beer.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/itemview_malt_hops.xml" value="0.1296875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
